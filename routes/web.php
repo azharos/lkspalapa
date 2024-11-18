@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// Auth::routes();
+
+// CARA 1
+// Route::get('login', [AuthController::class, 'login'])->middleware('guest');
+
+// CARA 2 
+Route::get('login', [AuthController::class, 'login']);
+
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('login', [AuthController::class, 'auth'])->name('login');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
